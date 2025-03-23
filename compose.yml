@@ -1,0 +1,42 @@
+services:
+  web:
+    image: jwill9999/llama3.2-web:latest
+    container_name: llama3.2-web-openweb-ui
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    networks:
+    - web
+
+  webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    ports:
+      - "3000:8080"
+    volumes:
+      - open-webui:/app/backend/data
+    environment:
+      - WEBUI_AUTH=False
+    networks:
+    - web
+  ollama:
+    image: jwill9999/llama3.2-ollama:latest
+    container_name: llama3.2-webui
+    ports:
+      - 11434:11434
+    volumes:
+      - ollama:/app/ollama
+    networks:
+     - web
+
+networks:
+  web:
+    driver: bridge
+
+volumes:
+  ollama:
+     driver: local
+  open-webui:
+     driver: local
+
