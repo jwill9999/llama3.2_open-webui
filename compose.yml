@@ -6,6 +6,7 @@ services:
       - "8000:8000"
     volumes:
       - .:/app
+      - vector_store:/app/chroma_db
     networks:
     - web
 
@@ -16,8 +17,10 @@ services:
       - "3000:8080"
     volumes:
       - open-webui:/app/backend/data
+      - ./open-webui-config.json:/app/backend/config/custom-endpoints.json
     environment:
       - WEBUI_AUTH=False
+      - ENABLE_CUSTOM_ENDPOINTS=true
     networks:
     - web
   ollama:
@@ -38,5 +41,7 @@ volumes:
   ollama:
      driver: local
   open-webui:
+     driver: local
+  vector_store:
      driver: local
 

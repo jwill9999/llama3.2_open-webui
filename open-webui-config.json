@@ -1,0 +1,33 @@
+{
+  "custom_endpoints": [
+    {
+      "name": "Document Upload",
+      "endpoint": "http://web:8000/upload",
+      "method": "POST",
+      "headers": {
+        "Content-Type": "multipart/form-data"
+      },
+      "parameters": [
+        {
+          "name": "file",
+          "type": "file",
+          "required": true,
+          "description": "Upload a document to the vector store"
+        }
+      ]
+    },
+    {
+      "name": "Ask Question",
+      "endpoint": "http://web:8000/ask",
+      "method": "GET",
+      "parameters": [
+        {
+          "name": "prompt",
+          "type": "string",
+          "required": true,
+          "description": "Your question about the uploaded documents"
+        }
+      ]
+    }
+  ]
+} 
